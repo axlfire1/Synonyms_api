@@ -23,9 +23,7 @@ RUN apk add --update --no-cache \
     imagemagick
 
 # set production envs
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_ENV development
 
 RUN mkdir /app
 WORKDIR /app

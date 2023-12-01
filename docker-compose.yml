@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: production.Dockerfile
       args:
-        environment: production
+        environment: development
         status: stable
     volumes:
       - .:/app
