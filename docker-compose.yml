@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  app:
+    environment:
+      SHELL: /bin/sh
+    build:
+      context: .
+      dockerfile: production.Dockerfile
+      args:
+        environment: production
+        status: stable
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
