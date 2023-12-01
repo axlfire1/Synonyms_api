@@ -45,5 +45,27 @@ RSpec.describe "Api::V1::Synonyms", type: :request do
       token = JSON.parse(response.body)['token']
       expect(token.size).to eq(99)
     end
+
+    it 'updates synonym correctly' do
+      synonym = Synonym.create!(word: 'othe', synonym: 'cool', approved: false)
+
+      valid_params = {
+        "username": "admin",
+        "password": "$dm!nhola123"
+      }
+    
+      post "#{base_url}/api/v1/login", params: valid_params, as: :json
+      expect(response).to be_successful
+
+      token = JSON.parse(response.body)['token']
+      expect(token.size).to eq(99)
+
+      expect(Synonym.count).to eq(2)
+      expect(Synonym.find(synonym.id).approved).to eq(false)
+
+      patch "#{base_url}/api/v1/admin/synonyms/#{synonym.id}", params: valid_params, as: :json, headers: { 'Authorization' => "Bearer #{token}" }
+      
+      expect(Synonym.find(synonym.id).approved).to eq(true)
+    end
   end
 end
