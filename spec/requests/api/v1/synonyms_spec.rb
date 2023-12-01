@@ -84,5 +84,25 @@ RSpec.describe "Api::V1::Synonyms", type: :request do
       
       expect(JSON.parse(response.body).first['approved']).to eq(true)
     end
+
+    it 'deletes synonym correctly' do
+      valid_params = {
+        "username": "admin",
+        "password": "$dm!nhola123"
+      }
+    
+      post "#{base_url}/api/v1/login", params: valid_params, as: :json
+      expect(response).to be_successful
+
+      token = JSON.parse(response.body)['token']
+      expect(token.size).to eq(99)
+
+      expect(Synonym.count).to eq(1)
+
+      delete "#{base_url}/api/v1/admin/synonyms/#{Synonym.last.id}", as: :json, headers: { 'Authorization' => "Bearer #{token}" }
+      
+      expect(Synonym.count).to eq(0)
+      expect(response.status).to eq(204)
+    end
   end
 end
