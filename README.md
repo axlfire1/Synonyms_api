@@ -14,7 +14,7 @@ Description: Retrieve a list of approved words and their synonyms.
 Example Curl Request:
 
 ```bash
-curl -X GET http://localhost:3000/api/v1/synonyms
+curl -X GET http://18.225.8.76:3000/api/v1/synonyms
 ```
 
 1.2 Provide a Synonym
@@ -23,7 +23,7 @@ Endpoint: POST /api/v1/synonyms
 Description: Submit a synonym for an existing or new word.
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"synonym": {"word": "example", "synonym": "sample"}}' http://localhost:3000/api/v1/synonyms
+curl -X POST -H "Content-Type: application/json" -d '{"synonym": {"word": "example", "synonym": "sample"}}' http://18.225.8.76:3000/api/v1/synonyms
 ```
 
 ### 2. Admin User Endpoints
@@ -33,7 +33,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"synonym": {"word": "examp
 Description: Authenticate as an admin user and obtain an access token.
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"username": "admin", "password": "$dm!nhola123"}' http://localhost:3000/api/v1/login
+curl -X POST -H "Content-Type: application/json" -d '{"username": "admin", "password": "$dm!nhola123"}' http://18.225.8.76:3000/api/v1/login
 ```
 
 Replace 'your_generated_token' with the actual token obtained from the login response.
@@ -45,7 +45,7 @@ Endpoint: GET /api/v1/admin/synonyms
 Description: Retrieve a list of synonyms submitted by anonymous users for review.
 
 ```bash
-curl -X GET -H "Authorization: Bearer your_generated_token" http://localhost:3000/api/v1/admin/synonyms
+curl -X GET -H "Authorization: Bearer your_generated_token" http://18.225.8.76:3000/api/v1/admin/synonyms
 ```
 
 2.3 Authorize Synonym
@@ -55,7 +55,7 @@ Endpoint: PATCH /api/v1/admin/synonyms/:id
 Description: Authorize a synonym submitted by an anonymous user.
 
 ```bash
-curl -X PATCH -H "Authorization: Bearer your_generated_token" http://localhost:3000/api/v1/admin/synonyms/1
+curl -X PATCH -H "Authorization: Bearer your_generated_token" http://18.225.8.76:3000/api/v1/admin/synonyms/1
 ```
 
 2.4 Delete Synonym
@@ -65,5 +65,5 @@ Endpoint: DELETE /api/v1/admin/synonyms/:id
 Description: Delete a synonym submitted by an anonymous user.
 
 ```bash
-curl -X DELETE -H "Authorization: Bearer your_generated_token" http://localhost:3000/api/v1/admin/synonyms/1
+curl -X DELETE -H "Authorization: Bearer your_generated_token" http://18.225.8.76:3000/api/v1/admin/synonyms/1
 ```
