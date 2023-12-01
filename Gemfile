@@ -67,6 +67,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'bullet'
   gem 'byebug'
 end
 
