@@ -1,4 +1,4 @@
-FROM ruby:3.0.1-alpine
+FROM ruby:3.2.2-alpine
 
 RUN apk -U upgrade
 RUN  apk --no-cache -t build-dependencies add \
@@ -10,7 +10,7 @@ RUN  apk --no-cache -t build-dependencies add \
     postgresql-dev \
     gcompat
 
-RUN apk add --no-cache tini openrc busybox-initscripts
+RUN apk add --no-cache tini openrc
 
 RUN apk add --update --no-cache \
     ruby-dev \
@@ -22,9 +22,6 @@ RUN apk add --update --no-cache \
     vips \
     imagemagick
 
-RUN apk add --update nodejs nodejs-npm
-RUN npm install --global yarn    
-
 # set production envs
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
@@ -32,11 +29,10 @@ ENV RAILS_LOG_TO_STDOUT true
 
 RUN mkdir /app
 WORKDIR /app
+RUN gem install bundler -v 2.4.17
 COPY Gemfile Gemfile.lock ./
 COPY . .
 RUN bundle install
-RUN bundle exec rails webpacker:install
-RUN bundle exec rake assets:precompile --trace
 
 # Add a script to be executed every time the container starts.
 COPY entrypoints/entrypoint.sh /usr/bin/

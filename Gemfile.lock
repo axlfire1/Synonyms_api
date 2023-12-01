@@ -249,6 +249,7 @@ DEPENDENCIES
   bcrypt
   bootsnap
   bullet
+  bundler
   byebug
   database_cleaner
   debug
