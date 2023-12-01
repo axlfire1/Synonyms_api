@@ -31,4 +31,19 @@ RSpec.describe "Api::V1::Synonyms", type: :request do
       expect(approved).to eq(false) 
     end
   end
+
+  context 'admin' do
+    it 'logins correctly' do
+      valid_params = {
+        "username": "admin",
+        "password": "$dm!nhola123"
+      }
+    
+      post "#{base_url}/api/v1/login", params: valid_params, as: :json
+      expect(response).to be_successful
+
+      token = JSON.parse(response.body)['token']
+      expect(token.size).to eq(99)
+    end
+  end
 end
