@@ -14,9 +14,4 @@ test:
 
 production:
   <<: *default
-  adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= Rails.application.credentials.prod_host_name %>
-  database: <%= Rails.application.credentials.prod_db_name %>
-  username: <%= Rails.application.credentials.prod_db_user_name %>
-  password: <%= Rails.application.credentials.prod_db_user_password %>
+  database: db/development-test.sqlite3
