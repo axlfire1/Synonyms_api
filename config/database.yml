@@ -5,10 +5,10 @@ default: &default
 
 development:
   <<: *default
-  database: fitune_challenge
-  database: fitune_challenge
-  username: davidst
-  password: postgres
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/development.sqlite3
 
 test:
   <<: *default
